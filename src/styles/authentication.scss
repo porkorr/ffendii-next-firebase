@@ -1,6 +1,8 @@
 @import "assets/variables";
 
 .authentication {
+  position: fixed;
+  top: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -8,8 +10,6 @@
   align-items: center;
   // position: relative;
   @media (max-width: 580px) {
-    position: fixed;
-    top: 0;
     height: 100%;
     padding: 10px;
     overflow: hidden;
