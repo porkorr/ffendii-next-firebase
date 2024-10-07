@@ -1,0 +1,284 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap");
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes dotWave1 {
+  0%, 25%, 100% {
+    opacity: 0;
+  }
+  30%, 90% {
+    opacity: 1;
+  }
+}
+@keyframes dotWave2 {
+  0%, 50%, 100% {
+    opacity: 0;
+  }
+  55%, 90% {
+    opacity: 1;
+  }
+}
+@keyframes dotWave3 {
+  0%, 75%, 100% {
+    opacity: 0;
+  }
+  80%, 90% {
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  90%, 100% {
+    opacity: 1;
+  }
+  0%, 95%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes colorChange {
+  0% {
+    color: #ffb3ba; /* pastel pink */
+  }
+  10% {
+    color: #ffd6a5; /* pastel peach */
+  }
+  20% {
+    color: #ffffba; /* pastel yellow */
+  }
+  30% {
+    color: #b5e7a0; /* pastel green */
+  }
+  40% {
+    color: #c0f2d1; /* pastel mint */
+  }
+  50% {
+    color: #a0c4ff; /* pastel blue */
+  }
+  60% {
+    color: #bdb2ff; /* pastel lavender */
+  }
+  70% {
+    color: #c9afff; /* pastel purple */
+  }
+  80% {
+    color: #a0ffe6; /* pastel turquoise */
+  }
+  90% {
+    color: #e6ffb3; /* pastel lime */
+  }
+  100% {
+    color: #ffb3ba; /* back to pastel pink */
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.account {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 10px 150px 10px;
+}
+@media (max-width: 1200px) {
+  .account {
+    width: 100%;
+    padding: 20px 10px 75px 10px;
+  }
+}
+.account .account-title {
+  display: flex;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .account .account-title {
+    margin-bottom: 10px;
+  }
+}
+.account .account-title h2 {
+  font-size: 40px;
+  color: #2f3137;
+}
+@media (max-width: 768px) {
+  .account .account-title h2 {
+    font-size: 28px;
+  }
+}
+.account .account-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: #2f3137;
+  padding: 40px;
+  color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
+  .account .account-content {
+    gap: 0;
+    padding: 20px;
+  }
+}
+.account .account-content .account-menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #3b3d45;
+  padding-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .account .account-content .account-menu {
+    padding-bottom: 10px;
+  }
+}
+.account .account-content .account-menu ul {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 580px) {
+  .account .account-content .account-menu ul {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+.account .account-content .account-menu ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  padding: 7px 20px;
+  border-radius: 5px;
+  position: relative;
+  background-color: #464a53;
+  font-size: 14px;
+  transition: none;
+}
+@media (max-width: 580px) {
+  .account .account-content .account-menu ul li a {
+    justify-content: center;
+  }
+}
+.account .account-content .account-menu ul li a.active {
+  background: linear-gradient(145deg, #d1ff00 0%, #ffd933 100%);
+  color: #17191c;
+}
+@media (max-width: 768px) {
+  .account .account-content .account-profile,
+  .account .account-content .account-email,
+  .account .account-content .account-password {
+    margin-top: 20px;
+  }
+}
+.account .account-content .account-profile .text,
+.account .account-content .account-email .text,
+.account .account-content .account-password .text {
+  margin-bottom: 20px;
+}
+.account .account-content .account-profile .text h4,
+.account .account-content .account-email .text h4,
+.account .account-content .account-password .text h4 {
+  font-size: 22px;
+}
+.account .account-content .account-profile .text p,
+.account .account-content .account-email .text p,
+.account .account-content .account-password .text p {
+  color: #757b8a;
+  font-size: 12px;
+}
+.account .account-content .account-profile .verified,
+.account .account-content .account-email .verified,
+.account .account-content .account-password .verified {
+  margin-bottom: 10px;
+}
+.account .account-content .account-profile .verified > div:nth-child(1),
+.account .account-content .account-email .verified > div:nth-child(1),
+.account .account-content .account-password .verified > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.account .account-content .account-profile .verified > div:nth-child(1) h4,
+.account .account-content .account-email .verified > div:nth-child(1) h4,
+.account .account-content .account-password .verified > div:nth-child(1) h4 {
+  font-size: 22px;
+  color: #d1ff00;
+}
+.account .account-content .account-profile .verified > div:nth-child(1) svg,
+.account .account-content .account-email .verified > div:nth-child(1) svg,
+.account .account-content .account-password .verified > div:nth-child(1) svg {
+  font-size: 22px;
+  color: #d1ff00;
+}
+.account .account-content .account-profile .verified > div:nth-child(2) p,
+.account .account-content .account-email .verified > div:nth-child(2) p,
+.account .account-content .account-password .verified > div:nth-child(2) p {
+  font-size: 12px;
+  color: #d1ff00;
+}
+.account .account-content .account-profile .not-verified,
+.account .account-content .account-email .not-verified,
+.account .account-content .account-password .not-verified {
+  margin-bottom: 10px;
+}
+.account .account-content .account-profile .not-verified > div:nth-child(1),
+.account .account-content .account-email .not-verified > div:nth-child(1),
+.account .account-content .account-password .not-verified > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.account .account-content .account-profile .not-verified > div:nth-child(1) h4,
+.account .account-content .account-email .not-verified > div:nth-child(1) h4,
+.account .account-content .account-password .not-verified > div:nth-child(1) h4 {
+  font-size: 22px;
+  color: #ff205f;
+}
+.account .account-content .account-profile .not-verified > div:nth-child(1) svg,
+.account .account-content .account-email .not-verified > div:nth-child(1) svg,
+.account .account-content .account-password .not-verified > div:nth-child(1) svg {
+  font-size: 22px;
+  color: #ff205f;
+}
+.account .account-content .account-profile .not-verified > div:nth-child(2) p,
+.account .account-content .account-email .not-verified > div:nth-child(2) p,
+.account .account-content .account-password .not-verified > div:nth-child(2) p {
+  font-size: 12px;
+  color: #ff205f;
+}
+.account .account-content .loading {
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .account .account-content .loading {
+    margin: 20px 0 10px 0;
+  }
+}

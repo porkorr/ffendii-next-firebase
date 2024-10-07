@@ -1,0 +1,76 @@
+@import "assets/variables";
+
+.authentication {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: relative;
+  @media (max-width: 580px) {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .image {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    margin-left: -700px;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  .modal {
+    width: 500px;
+    height: auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: $color-gray-50;
+    border: 1px solid $color-gray-60;
+    @media (max-width: 580px) {
+      border-radius: 10px;
+    }
+    .text-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+      h2 {
+        color: $color-white;
+        font-size: 36px;
+        @media (max-width: 580px) {
+          font-size: 28px;
+        }
+      }
+      p {
+        color: $color-white;
+        font-size: 14px;
+        @media (max-width: 580px) {
+          font-size: 12px;
+        }
+      }
+    }
+    .text-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+      @media (max-width: 580px) {
+        gap: 10px;
+      }
+      p {
+        color: $color-gray-99;
+        font-size: 14px;
+        @media (max-width: 580px) {
+          font-size: 12px;
+        }
+        a {
+          color: $color-white;
+        }
+      }
+    }
+  }
+}

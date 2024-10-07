@@ -1,0 +1,143 @@
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dotWave1 {
+  0%,
+  25%,
+  100% {
+    opacity: 0;
+  }
+  30%,
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes dotWave2 {
+  0%,
+  50%,
+  100% {
+    opacity: 0;
+  }
+  55%,
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes dotWave3 {
+  0%,
+  75%,
+  100% {
+    opacity: 0;
+  }
+  80%,
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  90%,
+  100% {
+    opacity: 1;
+  }
+  0%,
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+// @keyframes colorChange {
+//   0% {
+//     color: #ff3b30; /* bright red */
+//   }
+//   10% {
+//     color: #ff9500; /* bright orange */
+//   }
+//   20% {
+//     color: #ffcc00; /* bright yellow */
+//   }
+//   30% {
+//     color: #34c759; /* bright green */
+//   }
+//   40% {
+//     color: #5ac8fa; /* bright sky blue */
+//   }
+//   50% {
+//     color: #007aff; /* bright blue */
+//   }
+//   60% {
+//     color: #5856d6; /* bright purple */
+//   }
+//   70% {
+//     color: #ff2d55; /* bright pink */
+//   }
+//   80% {
+//     color: #4cd964; /* bright lime */
+//   }
+//   90% {
+//     color: #ffd60a; /* bright sunflower yellow */
+//   }
+//   100% {
+//     color: #ff3b30; /* back to bright red */
+//   }
+// }
+
+@keyframes colorChange {
+  0% {
+    color: #ffb3ba; /* pastel pink */
+  }
+  10% {
+    color: #ffd6a5; /* pastel peach */
+  }
+  20% {
+    color: #ffffba; /* pastel yellow */
+  }
+  30% {
+    color: #b5e7a0; /* pastel green */
+  }
+  40% {
+    color: #c0f2d1; /* pastel mint */
+  }
+  50% {
+    color: #a0c4ff; /* pastel blue */
+  }
+  60% {
+    color: #bdb2ff; /* pastel lavender */
+  }
+  70% {
+    color: #c9afff; /* pastel purple */
+  }
+  80% {
+    color: #a0ffe6; /* pastel turquoise */
+  }
+  90% {
+    color: #e6ffb3; /* pastel lime */
+  }
+  100% {
+    color: #ffb3ba; /* back to pastel pink */
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

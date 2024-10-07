@@ -1,0 +1,31 @@
+@import "_fonts";
+@import "_keyframes";
+
+$color-white: #ffffff;
+$color-black: #000000;
+$color-neonyellow: #d1ff00;
+$color-goldyellow: #ffd933;
+$color-green: #3aa90c;
+$color-pink: #ff205f;
+$color-purple: #cf3fab;
+
+$color-gray-99: #757b8a;
+$color-gray-90: #5e636e;
+$color-gray-80: #525661;
+$color-gray-70: #464a53;
+$color-gray-60: #3b3d45;
+$color-gray-50: #2f3137;
+$color-gray-40: #2a2c32;
+$color-gray-30: #232529;
+$color-gray-20: #17191c;
+$color-gray-10: #0c0d0e;
+
+$background-beach: linear-gradient(145deg, #4facfe 0%, #00f2fe 100%);
+$background-love: linear-gradient(145deg, #ff0844 0%, #ffb199 100%);
+$background-eart: linear-gradient(145deg, #b79891 0%, #94716b 100%);
+$background-skyline: linear-gradient(145deg, #1488cc 0%, #2b32b2 100%);
+$background-mojito: linear-gradient(145deg, #1d976c 0%, #93f9b9 100%);
+$background-mango: linear-gradient(145deg, #ffe259 0%, #ffa751 100%);
+$background-blushsky: linear-gradient(145deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+$background-neongold: linear-gradient(145deg, #d1ff00 0%, #ffd933 100%);
+$background-purple: linear-gradient(145deg, #dbbfdb 0%, #bbb5d8 50%, #877bae 100%);

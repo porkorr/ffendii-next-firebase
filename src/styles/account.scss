@@ -1,0 +1,165 @@
+@import "assets/variables";
+
+.account {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 10px 150px 10px;
+  @media (max-width: 1200px) {
+    width: 100%;
+    padding: 20px 10px 75px 10px;
+  }
+  .account-title {
+    display: flex;
+    margin-bottom: 20px;
+    @media (max-width: 768px) {
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 40px;
+      color: $color-gray-50;
+      @media (max-width: 768px) {
+        font-size: 28px;
+      }
+    }
+  }
+  .account-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: $color-gray-50;
+    padding: 40px;
+    color: $color-white;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    @media (max-width: 768px) {
+      gap: 0;
+      padding: 20px;
+    }
+    .account-menu {
+      display: flex;
+      // justify-content: center;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid $color-gray-60;
+      padding-bottom: 20px;
+      @media (max-width: 768px) {
+        padding-bottom: 10px;
+      }
+      ul {
+        display: flex;
+        gap: 10px;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        @media (max-width: 580px) {
+          width: 100%;
+          flex-direction: column;
+        }
+        li {
+          a {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: $color-white;
+            padding: 7px 20px;
+            border-radius: 5px;
+            position: relative;
+            background-color: $color-gray-70;
+            font-size: 14px;
+            transition: none;
+            @media (max-width: 580px) {
+              justify-content: center;
+            }
+            &.active {
+              background: $background-neongold;
+              color: $color-gray-20;
+            }
+          }
+        }
+      }
+    }
+    .account-profile,
+    .account-email,
+    .account-password {
+      // padding: 20px 0px;
+      @media (max-width: 768px) {
+        margin-top: 20px;
+      }
+      .text {
+        margin-bottom: 20px;
+        h4 {
+          font-size: 22px;
+        }
+        p {
+          color: $color-gray-99;
+          font-size: 12px;
+          // max-width: 80%;
+        }
+      }
+      .verified {
+        margin-bottom: 10px;
+        > div {
+          &:nth-child(1) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: max-content;
+            h4 {
+              font-size: 22px;
+              color: $color-neonyellow;
+            }
+            svg {
+              font-size: 22px;
+              color: $color-neonyellow;
+            }
+          }
+          &:nth-child(2) {
+            p {
+              font-size: 12px;
+              color: $color-neonyellow;
+            }
+          }
+        }
+      }
+      .not-verified {
+        margin-bottom: 10px;
+        > div {
+          &:nth-child(1) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: max-content;
+            h4 {
+              font-size: 22px;
+              color: $color-pink;
+            }
+            svg {
+              font-size: 22px;
+              color: $color-pink;
+            }
+          }
+          &:nth-child(2) {
+            p {
+              font-size: 12px;
+              color: $color-pink;
+            }
+          }
+        }
+      }
+    }
+    .loading {
+      margin-top: 20px;
+      @media (max-width: 768px) {
+        margin: 20px 0 10px 0;
+      }
+    }
+  }
+}

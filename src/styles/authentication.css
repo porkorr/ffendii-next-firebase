@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap");
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes dotWave1 {
+  0%, 25%, 100% {
+    opacity: 0;
+  }
+  30%, 90% {
+    opacity: 1;
+  }
+}
+@keyframes dotWave2 {
+  0%, 50%, 100% {
+    opacity: 0;
+  }
+  55%, 90% {
+    opacity: 1;
+  }
+}
+@keyframes dotWave3 {
+  0%, 75%, 100% {
+    opacity: 0;
+  }
+  80%, 90% {
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  90%, 100% {
+    opacity: 1;
+  }
+  0%, 95%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes colorChange {
+  0% {
+    color: #ffb3ba; /* pastel pink */
+  }
+  10% {
+    color: #ffd6a5; /* pastel peach */
+  }
+  20% {
+    color: #ffffba; /* pastel yellow */
+  }
+  30% {
+    color: #b5e7a0; /* pastel green */
+  }
+  40% {
+    color: #c0f2d1; /* pastel mint */
+  }
+  50% {
+    color: #a0c4ff; /* pastel blue */
+  }
+  60% {
+    color: #bdb2ff; /* pastel lavender */
+  }
+  70% {
+    color: #c9afff; /* pastel purple */
+  }
+  80% {
+    color: #a0ffe6; /* pastel turquoise */
+  }
+  90% {
+    color: #e6ffb3; /* pastel lime */
+  }
+  100% {
+    color: #ffb3ba; /* back to pastel pink */
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.authentication {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 580px) {
+  .authentication {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    padding: 10px;
+    overflow: hidden;
+  }
+}
+.authentication .image {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  margin-left: -700px;
+}
+@media (max-width: 768px) {
+  .authentication .image {
+    display: none;
+  }
+}
+.authentication .modal {
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #2f3137;
+  border: 1px solid #3b3d45;
+}
+@media (max-width: 580px) {
+  .authentication .modal {
+    border-radius: 10px;
+  }
+}
+.authentication .modal .text-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.authentication .modal .text-header h2 {
+  color: #ffffff;
+  font-size: 36px;
+}
+@media (max-width: 580px) {
+  .authentication .modal .text-header h2 {
+    font-size: 28px;
+  }
+}
+.authentication .modal .text-header p {
+  color: #ffffff;
+  font-size: 14px;
+}
+@media (max-width: 580px) {
+  .authentication .modal .text-header p {
+    font-size: 12px;
+  }
+}
+.authentication .modal .text-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+@media (max-width: 580px) {
+  .authentication .modal .text-footer {
+    gap: 10px;
+  }
+}
+.authentication .modal .text-footer p {
+  color: #757b8a;
+  font-size: 14px;
+}
+@media (max-width: 580px) {
+  .authentication .modal .text-footer p {
+    font-size: 12px;
+  }
+}
+.authentication .modal .text-footer p a {
+  color: #ffffff;
+}
