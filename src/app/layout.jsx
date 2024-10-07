@@ -5,8 +5,8 @@ import "@/styles/globals.css";
 export const metadata = {
   title: "ffendii",
   description: "request song",
-  themeColor: "black",
-  appleMobileWebAppStatusBarStyle: "black",
+  // themeColor: "black",
+  // appleMobileWebAppStatusBarStyle: "black",
 };
 
 // Viewport configuration
