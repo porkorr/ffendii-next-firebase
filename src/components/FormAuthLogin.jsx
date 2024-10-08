@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Input, Button, Form, message } from "antd";
 import { rulesEmail } from "@/utils/validationRules";
 import useAuth from "@/hooks/useAuth";
@@ -8,12 +11,14 @@ const FormLogin = () => {
   const { login } = useAuth();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (value) => {
     const { email, password } = value;
     try {
       await login(email, password);
       message.success("All set! Let’s go!");
+      router.push("/");
     } catch (error) {
       const { message: errorMessage, field } = authError(error);
       form.setFields([{ name: field, errors: [errorMessage] }]);

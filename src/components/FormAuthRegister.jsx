@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Input, Button, Form, message } from "antd";
 import { rulesDisplayName, rulesEmail, rulesPassword, rulesConfirmPassword } from "@/utils/validationRules";
 import { doc, setDoc, getDocs, collection, query, where } from "firebase/firestore";
@@ -15,6 +16,7 @@ const FormRegister = () => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const checkDisplayNameExists = async (displayName) => {
     const users = collection(db, "users");
@@ -56,6 +58,7 @@ const FormRegister = () => {
         lastTimeRequest: "",
       });
       message.success("Register successfully");
+      router.push("/");
     } catch (error) {
       const { message: errorMessage, field } = authError(error);
       form.setFields([{ name: field, errors: [errorMessage] }]);
