@@ -23,7 +23,8 @@ const AuthProvider = ({ children }) => {
     // return signInWithEmailAndPassword(auth, email, password);
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const userDocRef = doc(db, "users", userCredential.user.uid);
-    await setDoc(userDocRef, {
+
+    await updateDoc(userDocRef, {
       email: userCredential.user.email,
     });
 
