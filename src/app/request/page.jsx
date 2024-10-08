@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { HiStatusOnline } from "react-icons/hi";
 import { formatDateTime, getYouTubeVideoId } from "@/utils/utils";
+import { Modal, message } from "antd";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { db } from "@/utils/firebase";
 import useAuth from "@/hooks/useAuth";
 import useFirestore from "@/hooks/useFirestore";
 import FormRequest from "@/components/FormRequest";
@@ -10,7 +14,53 @@ import "@/styles/request.css";
 
 const RequestPage = () => {
   const { user } = useAuth();
-  const { requests, settings } = useFirestore();
+  const { requests, setRequests, settings } = useFirestore();
+  const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
+  const [requestToDelete, setRequestToDelete] = useState(null);
+
+  const handleDeleteSelect = (request) => {
+    setRequestToDelete(request);
+    setModalDeleteOpen(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setModalDeleteOpen(false);
+  };
+
+  const handleDeleteRequest = async () => {
+    if (requestToDelete) {
+      try {
+        const requestDocRef = doc(db, "requests", requestToDelete.id);
+        await deleteDoc(requestDocRef)
+          .then(() => {
+            setRequests((prevState) => {
+              const remainingRequests = prevState.filter((request) => request.id !== requestToDelete.id);
+              const reorderedRequests = remainingRequests.map((item, index) => ({
+                ...item,
+                order: index + 1,
+              }));
+
+              reorderedRequests.map(async (item, index) => {
+                try {
+                  await updateDoc(doc(db, "requests", item.id), { order: item.order });
+                } catch (error) {
+                  // console.error(`Failed to update order for ${req.title}: `, error);
+                }
+              });
+
+              return reorderedRequests;
+            });
+            message.success("Deleted!");
+            setModalDeleteOpen(false);
+          })
+          .catch((error) => {
+            // console.error("Error deleting request: ", error);
+          });
+      } catch (error) {
+        // console.error("Error in handleDeleteRequest: ", error);
+      }
+    }
+  };
 
   return (
     <main className="fade-in">
@@ -72,11 +122,13 @@ const RequestPage = () => {
                     <div className="item-detail">
                       <div className="title">{request.title}</div>
                       <div className="detail">
-                        {/* <div className="delete">
+                        <div className="delete">
                           {request.sender.uid === user?.uid && user?.role && (
-                            <span className="text-[12px]">delete</span>
+                            <span className="text-[12px]" onClick={(e) => handleDeleteSelect(request)}>
+                              {`[delete]`}
+                            </span>
                           )}
-                        </div> */}
+                        </div>
                         <div className="sender">
                           {request.sender.role === "admin" && (
                             <span className="text-[#ffd933]">{request.sender.displayName}</span>
@@ -129,6 +181,37 @@ const RequestPage = () => {
               </div>
             </div>
           </div>
+          <Modal
+            title="Delete Song"
+            open={modalDeleteOpen}
+            onOk={handleDeleteRequest}
+            onCancel={handleDeleteCancel}
+            centered
+            okButtonProps={{
+              style: {
+                background: "linear-gradient(145deg, #d1ff00 0%, #ffd933 100%)",
+                border: "none",
+                color: "#17191c",
+                borderRadius: "5px",
+                height: "40px",
+                padding: "0 30px",
+                fontWeight: "500",
+              },
+            }}
+            cancelButtonProps={{
+              style: {
+                backgroundColor: "#ffffff",
+                borderColor: "#ffffff",
+                color: "#17191c",
+                borderRadius: "5px",
+                height: "40px",
+                padding: "0 30px",
+                fontWeight: "500",
+              },
+            }}
+          >
+            <p>{requestToDelete?.title}</p>
+          </Modal>
         </div>
       ) : (
         <div className="request-offline">

@@ -49,6 +49,8 @@ const FormRequest = ({ isBlurForm }) => {
   }, [nextTimeRequest]);
 
   const handleRequest = async (values) => {
+    const { title, url, message } = values;
+
     if (isDisabled) return;
 
     if (isBlurForm) {
@@ -58,9 +60,9 @@ const FormRequest = ({ isBlurForm }) => {
 
         const request = await addDoc(collection(db, "requests"), {
           order: requestOrder,
-          title: values.title,
-          url: values.url,
-          message: "",
+          title: title,
+          url: url || "",
+          message: message || "",
           createdAt: new Date(),
           updatedAt: new Date(),
           sender: userRef,
@@ -96,6 +98,14 @@ const FormRequest = ({ isBlurForm }) => {
           className="!bg-gray-50"
         />
       </Form.Item>
+      <Form.Item name="message">
+        <Input
+          placeholder="Hey, feel free to leave me a message!"
+          autoComplete="off"
+          size="large"
+          className="!bg-gray-50"
+        />
+      </Form.Item>
       <Form.Item>
         <Button
           htmlType="submit"
@@ -104,7 +114,7 @@ const FormRequest = ({ isBlurForm }) => {
           className={`mt-[15px] !bg-neongold ${isDisabled && "opacity-50 !cursor-auto"}`}
         >
           {remainingTime <= 0
-            ? `send request`
+            ? `Request`
             : `${formatToTwoDigits(Math.floor(remainingTime / 60))} : ${formatToTwoDigits(remainingTime % 60)}`}
         </Button>
       </Form.Item>

@@ -28,7 +28,6 @@ const TableRequestList = () => {
     {
       width: 20,
       align: "center",
-      // title: "#",
       key: "index",
       render: () => <DragHandle />,
     },
@@ -44,11 +43,31 @@ const TableRequestList = () => {
       render: (text, record) => <>{record.title}</>,
     },
     {
+      width: 100,
       title: "URL",
-      render: (text, record) => <>{record.url}</>,
+      render: (text, record) => (
+        <a
+          href={record.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#ffffff", textDecoration: "underline" }}
+        >
+          {record.url}
+        </a>
+        // <span
+        //   style={{ cursor: "pointer", color: "#007bff", textDecoration: "underline" }}
+        //   onClick={() => handleCopyUrl(record.url)}
+        // >
+        //   {record.url}
+        // </span>
+      ),
     },
     {
-      width: 180,
+      title: "Message",
+      render: (text, record) => <>{record.message}</>,
+    },
+    {
+      width: 100,
       title: "Sender",
       render: (text, record) => <>{record.sender.displayName}</>,
     },
@@ -80,6 +99,18 @@ const TableRequestList = () => {
       ),
     },
   ];
+
+  // const handleCopyUrl = (url) => {
+  //   navigator.clipboard
+  //     .writeText(url)
+  //     .then(() => {
+  //       message.success("URL copied to clipboard!");
+  //     })
+  //     .catch((error) => {
+  //       message.error("Failed to copy URL!");
+  //       console.error("Error copying URL: ", error);
+  //     });
+  // };
 
   const DragHandle = () => {
     const { setActivatorNodeRef, listeners } = useContext(RowContext);

@@ -44,7 +44,7 @@ const FormChangePassword = () => {
       message.success("Password updated successfully!", 5);
       form.resetFields();
     } catch (error) {
-      console.log(error.code);
+      // console.log(error.code);
       const { message: errorMessage, field } = authError(error);
       form.setFields([{ name: field, errors: [errorMessage] }]);
     } finally {

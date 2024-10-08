@@ -583,6 +583,9 @@ footer p {
   fill: #ffffff !important;
 }
 .ant-pagination .ant-pagination-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #464a53 !important;
 }
 .ant-pagination .ant-pagination-item a {

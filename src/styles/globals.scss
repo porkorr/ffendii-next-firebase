@@ -520,6 +520,9 @@ footer {
   }
 
   .ant-pagination-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #464a53 !important;
     a {
       color: #ffffff !important;
