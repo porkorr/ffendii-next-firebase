@@ -101,7 +101,7 @@
 @media (max-width: 768px) {
   .request {
     width: 100%;
-    padding: 10px 10px 75px 10px;
+    padding: 20px 10px 75px 10px;
   }
 }
 .request .now-playing {
