@@ -20,7 +20,14 @@ const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const login = async (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    // return signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userDocRef = doc(db, "users", userCredential.user.uid);
+    await setDoc(userDocRef, {
+      email: userCredential.user.email,
+    });
+
+    return userCredential;
   };
 
   const register = async (email, password) => {
@@ -40,7 +47,6 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUserAuth(currentUser);
         const userDocRef = doc(db, "users", currentUser.uid);
-        await updateDoc(userDocRef, { email: currentUser.email });
         const userUnsub = onSnapshot(userDocRef, (docSnap) => {
           if (docSnap.exists()) {
             setUser(docSnap.data());
