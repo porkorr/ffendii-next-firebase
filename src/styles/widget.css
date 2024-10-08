@@ -114,7 +114,7 @@ body::before {
 }
 .widget-card .widget-background {
   position: absolute;
-  opacity: 0.1;
+  opacity: 0.2;
   animation: scale 35s linear infinite;
 }
 .widget-card .widget-background img {
