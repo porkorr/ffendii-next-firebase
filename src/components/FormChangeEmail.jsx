@@ -18,7 +18,7 @@ import authError from "@/utils/authError";
 const FormChangeEmail = ({ isVerified, setIsVerified }) => {
   const { user } = useAuth();
   const [form] = Form.useForm();
-  const [email, setEmail] = useState(user?.email || "");
+  const [email, setEmail] = useState(auth.currentUser.email || "");
   const [isChecking, setIsChecking] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
