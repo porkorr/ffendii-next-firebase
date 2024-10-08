@@ -19,7 +19,7 @@ const AuthPage = ({ children }) => {
   }, [user, isLoading, pathname]);
 
   if (isLoading) {
-    return <Loading className="loading w-screen h-screen" />;
+    return <Loading className="loading fixed top-0 w-screen h-screen" />;
   }
 
   return (
