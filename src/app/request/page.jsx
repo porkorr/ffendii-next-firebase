@@ -122,13 +122,6 @@ const RequestPage = () => {
                     <div className="item-detail">
                       <div className="title">{request.title}</div>
                       <div className="detail">
-                        <div className="delete">
-                          {request.sender.uid === user?.uid && user?.role && (
-                            <span className="text-[12px]" onClick={(e) => handleDeleteSelect(request)}>
-                              {`[delete]`}
-                            </span>
-                          )}
-                        </div>
                         <div className="sender">
                           {request.sender.role === "admin" && (
                             <span className="text-[#ffd933]">{request.sender.displayName}</span>
@@ -137,6 +130,13 @@ const RequestPage = () => {
                             <span className="text-[#ffffff]">{request.sender.displayName}</span>
                           )}
                           <div className="time">{formatDateTime(request.createdAt)}</div>
+                        </div>
+                        <div className="delete">
+                          {request.sender.uid === user?.uid && user?.role && (
+                            <span className="text-[12px]" onClick={(e) => handleDeleteSelect(request)}>
+                              {`[delete]`}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
