@@ -210,8 +210,8 @@
             position: relative;
             gap: 20px;
             @media (max-width: 580px) {
-              justify-content: center;
-              align-items: center;
+              justify-content: flex-start;
+              align-items: flex-start;
               flex-direction: column;
               padding: 20px;
               gap: 10px;
@@ -221,7 +221,7 @@
               color: $color-white;
               @media (max-width: 768px) {
                 font-size: 16px;
-                text-align: center;
+                // text-align: center;
               }
             }
             .detail {
@@ -231,7 +231,9 @@
               align-items: flex-end;
               flex-direction: column;
               @media (max-width: 580px) {
-                // width: 100%;
+                width: 100%;
+                justify-content: space-between;
+                flex-direction: row;
               }
               .sender {
                 display: flex;
@@ -240,7 +242,7 @@
                 font-size: 14px;
                 color: $color-white;
                 @media (max-width: 580px) {
-                  align-items: center;
+                  align-items: flex-start;
                   font-size: 12px;
                 }
                 svg {
@@ -249,15 +251,20 @@
                 span {
                   margin-top: 1px;
                 }
-              }
-              .time {
-                font-size: 10px;
-                color: $color-gray-99;
+                .time {
+                  font-size: 10px;
+                  color: $color-gray-99;
+                }
               }
               .delete {
                 font-size: 12px;
                 color: $color-pink;
                 cursor: pointer;
+                // @media (max-width: 580px) {
+                //   position: absolute;
+                //   top: 5px;
+                //   right: 5px;
+                // }
               }
             }
           }

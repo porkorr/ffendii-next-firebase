@@ -335,8 +335,8 @@
 }
 @media (max-width: 580px) {
   .request .up-next .next-requests .list .item .item-detail {
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
     padding: 20px;
     gap: 10px;
@@ -349,7 +349,6 @@
 @media (max-width: 768px) {
   .request .up-next .next-requests .list .item .item-detail .title {
     font-size: 16px;
-    text-align: center;
   }
 }
 .request .up-next .next-requests .list .item .item-detail .detail {
@@ -358,6 +357,13 @@
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
+}
+@media (max-width: 580px) {
+  .request .up-next .next-requests .list .item .item-detail .detail {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+  }
 }
 .request .up-next .next-requests .list .item .item-detail .detail .sender {
   display: flex;
@@ -368,7 +374,7 @@
 }
 @media (max-width: 580px) {
   .request .up-next .next-requests .list .item .item-detail .detail .sender {
-    align-items: center;
+    align-items: flex-start;
     font-size: 12px;
   }
 }
@@ -378,7 +384,7 @@
 .request .up-next .next-requests .list .item .item-detail .detail .sender span {
   margin-top: 1px;
 }
-.request .up-next .next-requests .list .item .item-detail .detail .time {
+.request .up-next .next-requests .list .item .item-detail .detail .sender .time {
   font-size: 10px;
   color: #757b8a;
 }
