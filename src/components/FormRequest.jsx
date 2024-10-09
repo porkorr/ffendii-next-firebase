@@ -75,10 +75,10 @@ const FormRequest = ({ isBlurForm }) => {
           form.resetFields();
           message.success("Request sent successfully");
         } else {
-          // console.error("Error: request not added successfully");
+          //
         }
       } catch (e) {
-        // console.error("Error adding document: ", e);
+        //
       }
     }
   };

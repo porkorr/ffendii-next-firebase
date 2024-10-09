@@ -54,12 +54,6 @@ const TableRequestList = () => {
         >
           {record.url}
         </a>
-        // <span
-        //   style={{ cursor: "pointer", color: "#007bff", textDecoration: "underline" }}
-        //   onClick={() => handleCopyUrl(record.url)}
-        // >
-        //   {record.url}
-        // </span>
       ),
     },
     {
@@ -99,18 +93,6 @@ const TableRequestList = () => {
       ),
     },
   ];
-
-  // const handleCopyUrl = (url) => {
-  //   navigator.clipboard
-  //     .writeText(url)
-  //     .then(() => {
-  //       message.success("URL copied to clipboard!");
-  //     })
-  //     .catch((error) => {
-  //       message.error("Failed to copy URL!");
-  //       console.error("Error copying URL: ", error);
-  //     });
-  // };
 
   const DragHandle = () => {
     const { setActivatorNodeRef, listeners } = useContext(RowContext);
@@ -174,7 +156,7 @@ const TableRequestList = () => {
           try {
             await updateDoc(doc(db, "requests", request.id), { order: request.order });
           } catch (error) {
-            // console.error(`Failed to update order for ${req.title}: `, error);
+            //
           }
         });
 
@@ -205,7 +187,7 @@ const TableRequestList = () => {
       });
       message.success("Edited");
     } catch (error) {
-      // console.error(`Failed to update: `, error);
+      //
     }
 
     setModalEditOpen(false);
@@ -239,7 +221,7 @@ const TableRequestList = () => {
                 try {
                   await updateDoc(doc(db, "requests", item.id), { order: item.order });
                 } catch (error) {
-                  // console.error(`Failed to update order for ${req.title}: `, error);
+                  //
                 }
               });
 
@@ -249,10 +231,10 @@ const TableRequestList = () => {
             setModalDeleteOpen(false);
           })
           .catch((error) => {
-            // console.error("Error deleting request: ", error);
+            //
           });
       } catch (error) {
-        // console.error("Error in handleDeleteRequest: ", error);
+        //
       }
     }
   };

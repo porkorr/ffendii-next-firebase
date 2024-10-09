@@ -52,7 +52,7 @@ const FormRegister = () => {
         createdAt: new Date(),
         lastSignIn: user.metadata.lastSignInTime,
         gender: "",
-        role: "user",
+        role: "member",
         subscription: false,
         isBanned: false,
         lastTimeRequest: "",

@@ -53,7 +53,6 @@ const FormChangeProfile = () => {
         setLoading(false);
       }
     } catch (error) {
-      // console.error("Error updating profile: ", error);
       message.error("Failed to update display name");
     }
   };

@@ -67,7 +67,6 @@ const FormChangeEmail = ({ isVerified, setIsVerified }) => {
         message.warning("Please check your inbox to verify your new email address.", 5);
       }
     } catch (error) {
-      // console.log(error.code);
       const { message: errorMessage, field } = authError(error);
       form.setFields([{ name: field, errors: [errorMessage] }]);
       setLoading(false);

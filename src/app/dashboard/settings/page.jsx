@@ -32,10 +32,10 @@ const DashboardSettingsPage = () => {
         await updateDoc(settingsDocRef, updatedSettings);
         setSettings(updatedSettings);
       } catch (error) {
-        // console.error("Error updating settings: ", error);
+        //
       }
     } else {
-      // console.error("No settings document found");
+      //
     }
   };
 
@@ -53,11 +53,11 @@ const DashboardSettingsPage = () => {
         setSettings(updatedSettings);
         message.success("Cooldown seconds updated successfully!");
       } catch (error) {
-        // console.error("Error updating cooldown seconds: ", error);
+        //
         message.error("Failed to update cooldown seconds.");
       }
     } else {
-      // console.error("No settings document found");
+      //
     }
   };
 

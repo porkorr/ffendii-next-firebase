@@ -88,7 +88,7 @@ const Header = () => {
                 </li>
               </ul>
             </nav>
-          ) : user?.role === "user" ? (
+          ) : user?.role === "member" ? (
             <nav className="login">
               <ul>
                 <li>

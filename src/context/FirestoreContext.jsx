@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
-import { collection, getDoc, doc, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, getDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 
 const FirestoreContext = createContext();
@@ -25,7 +25,7 @@ const FirestoreProvider = ({ children }) => {
           }
         : null;
     } catch (error) {
-      // console.error("Error fetching sender data: ", error);
+      //
       return null;
     }
   };
@@ -48,7 +48,7 @@ const FirestoreProvider = ({ children }) => {
         );
       },
       (error) => {
-        // console.error("Error subscribing to sender data: ", error);
+        //
       }
     );
   };
@@ -83,7 +83,7 @@ const FirestoreProvider = ({ children }) => {
           });
         },
         (error) => {
-          // console.error("Error fetching requests: ", error);
+          //
         }
       );
 
@@ -91,7 +91,7 @@ const FirestoreProvider = ({ children }) => {
         unsubscribeRequests();
       };
     } catch (error) {
-      // console.error("Error in fetchRequests: ", error);
+      //
     }
   };
 
@@ -101,7 +101,6 @@ const FirestoreProvider = ({ children }) => {
         query(collection(db, "settings")),
         async (snapshot) => {
           if (snapshot.empty) {
-            // console.log("No settings found");
             setSettings([]);
           } else {
             const settings = await Promise.all(
@@ -117,13 +116,13 @@ const FirestoreProvider = ({ children }) => {
           }
         },
         (error) => {
-          // console.error("Error fetching settings: ", error);
+          //
         }
       );
 
       return () => unsubscribe();
     } catch (error) {
-      // console.error("Error in fetchSettings: ", error);
+      //
     }
   };
 
@@ -133,7 +132,6 @@ const FirestoreProvider = ({ children }) => {
         query(collection(db, "users")),
         async (snapshot) => {
           if (snapshot.empty) {
-            // console.log("No users found");
             setUsers([]);
           } else {
             const usersList = await Promise.all(
@@ -149,13 +147,13 @@ const FirestoreProvider = ({ children }) => {
           }
         },
         (error) => {
-          // console.error("Error fetching users: ", error);
+          //
         }
       );
 
       return () => unsubscribe();
     } catch (error) {
-      // console.error("Error in fetchUsers: ", error);
+      //
     }
   };
 

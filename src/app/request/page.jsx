@@ -44,7 +44,7 @@ const RequestPage = () => {
                 try {
                   await updateDoc(doc(db, "requests", item.id), { order: item.order });
                 } catch (error) {
-                  // console.error(`Failed to update order for ${req.title}: `, error);
+                  //
                 }
               });
 
@@ -54,10 +54,10 @@ const RequestPage = () => {
             setModalDeleteOpen(false);
           })
           .catch((error) => {
-            // console.error("Error deleting request: ", error);
+            //
           });
       } catch (error) {
-        // console.error("Error in handleDeleteRequest: ", error);
+        //
       }
     }
   };
@@ -126,7 +126,7 @@ const RequestPage = () => {
                           {request.sender.role === "admin" && (
                             <span className="text-[#ffd933]">{request.sender.displayName}</span>
                           )}
-                          {request.sender.role === "user" && (
+                          {request.sender.role === "member" && (
                             <span className="text-[#ffffff]">{request.sender.displayName}</span>
                           )}
                           <div className="time">{formatDateTime(request.createdAt)}</div>

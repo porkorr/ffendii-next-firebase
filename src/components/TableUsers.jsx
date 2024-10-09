@@ -33,7 +33,6 @@ const TableUsers = () => {
       message.success(`User has been ${isBanAction ? "banned" : "unbanned"}.`);
       setModalOpen(false);
     } catch (error) {
-      // console.error(`Error ${isBanAction ? "banning" : "unbanning"} user:`, error);
       message.error(`Failed to ${isBanAction ? "ban" : "unban"} user.`);
     }
   };
