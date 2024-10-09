@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HiStatusOnline } from "react-icons/hi";
 import { formatDateTime, getYouTubeVideoId } from "@/utils/utils";
 import { Modal, message } from "antd";
@@ -64,7 +64,7 @@ const RequestPage = () => {
 
   return (
     <main className="fade-in">
-      {settings.live === true ? (
+      {settings.live ? (
         <div className="request">
           <div className="now-playing">
             {requests[0]?.url && getYouTubeVideoId(requests[0]?.url) && (
@@ -80,7 +80,7 @@ const RequestPage = () => {
                 <HiStatusOnline size={20} />
                 Live
               </div>
-              {requests.length !== 0 ? (
+              {requests.length > 0 ? (
                 <>
                   <div className="now-title">
                     <p>Now playing</p>
@@ -96,7 +96,7 @@ const RequestPage = () => {
                 </>
               ) : (
                 <>
-                  <div className="now-song-name">
+                  <div className="now-song-name fade-in">
                     <p>No songs available</p>
                   </div>
                 </>
@@ -104,13 +104,13 @@ const RequestPage = () => {
             </div>
           </div>
           <div className="up-next">
-            {requests.length !== 0 ? (
+            {requests.length > 1 ? (
               <div className="next-title">
                 <h4>Up Next</h4>
                 <p>{requests.length - 1} remaining in queue</p>
               </div>
             ) : (
-              <div className="next-empty">
+              <div className="next-empty fade-in">
                 <p>no song in queue</p>
               </div>
             )}
@@ -214,7 +214,7 @@ const RequestPage = () => {
           </Modal>
         </div>
       ) : (
-        <div className="request-offline">
+        <div className="request-offline fade-in">
           <h2>ffendii is offline.</h2>
           <p>I'll be back online soon!</p>
         </div>

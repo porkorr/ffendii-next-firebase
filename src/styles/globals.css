@@ -570,6 +570,17 @@ footer p {
 .ant-table .ant-table-tbody .ant-table-row .ant-table-cell-row-hover {
   background-color: #17191c !important;
 }
+.ant-table .ant-table-tbody .ant-table-placeholder .ant-table-cell {
+  background-color: #232529 !important;
+  border-right: 1px solid #3b3d45 !important;
+  border-bottom: 1px solid #3b3d45 !important;
+}
+.ant-table .ant-table-tbody .ant-table-placeholder .ant-table-cell:hover {
+  background-color: #232529 !important;
+}
+.ant-table .ant-table-tbody .ant-table-placeholder .ant-table-cell .ant-empty-description {
+  color: #ffffff;
+}
 
 .ant-pagination .ant-pagination-disabled {
   opacity: 0.3;

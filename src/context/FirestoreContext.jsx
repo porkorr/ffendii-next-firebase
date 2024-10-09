@@ -3,6 +3,7 @@
 import { createContext, useState, useEffect } from "react";
 import { collection, getDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "@/utils/firebase";
+import Loading from "@/components/Loading";
 
 const FirestoreContext = createContext();
 
@@ -10,6 +11,7 @@ const FirestoreProvider = ({ children }) => {
   const [requests, setRequests] = useState([]);
   const [settings, setSettings] = useState([]);
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // ดึงข้อมูล sender ทั้งหมดจาก reference
   const fetchSenderData = async (senderRef) => {
@@ -158,10 +160,17 @@ const FirestoreProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchRequests();
-    fetchSettings();
-    fetchUsers();
+    const fetchData = async () => {
+      await Promise.all([fetchRequests(), fetchSettings(), fetchUsers()]);
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, []);
+
+  if (isLoading) {
+    return <Loading className="loading w-screen h-screen" />;
+  }
 
   return (
     <FirestoreContext.Provider value={{ requests, setRequests, settings, setSettings, users, setUsers }}>
