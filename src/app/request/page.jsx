@@ -160,11 +160,11 @@ const RequestPage = () => {
                     {!user?.role ? (
                       <>
                         <p>
-                          Please <a href="/login">log in</a> to request a song!
+                          Please <a href="auth/login">log in</a> to request a song!
                         </p>
                         <p>
-                          If you don’t have an account yet, feel free to <a href="/register">register</a> and join the
-                          fun!
+                          If you don’t have an account yet, feel free to <a href="auth/register">register</a> and join
+                          the fun!
                         </p>
                       </>
                     ) : user?.isBanned === true ? (

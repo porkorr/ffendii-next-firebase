@@ -50,7 +50,7 @@
       @media (max-width: 580px) {
         min-height: 250px;
         height: 100%;
-        padding: 40px 10px 10px 10px;
+        // padding: 40px 10px 10px 10px;
       }
       .now-badge-live {
         display: flex;
@@ -142,9 +142,15 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 50px;
+      @media (max-width: 580px) {
+        margin: 30px 0;
+      }
       p {
         color: $color-gray-50;
         font-size: 40px;
+        @media (max-width: 580px) {
+          font-size: 28px;
+        }
       }
     }
     .next-requests {

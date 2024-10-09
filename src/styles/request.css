@@ -150,7 +150,6 @@
   .request .now-playing .now-content {
     min-height: 250px;
     height: 100%;
-    padding: 40px 10px 10px 10px;
   }
 }
 .request .now-playing .now-content .now-badge-live {
@@ -253,9 +252,19 @@
   align-items: center;
   margin-bottom: 50px;
 }
+@media (max-width: 580px) {
+  .request .up-next .next-empty {
+    margin: 30px 0;
+  }
+}
 .request .up-next .next-empty p {
   color: #2f3137;
   font-size: 40px;
+}
+@media (max-width: 580px) {
+  .request .up-next .next-empty p {
+    font-size: 28px;
+  }
 }
 .request .up-next .next-requests {
   position: relative;
