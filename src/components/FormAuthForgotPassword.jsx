@@ -18,7 +18,7 @@ const FormLogin = () => {
       await resetPassword(email);
       message.success("Check your inbox for further instructions.");
       form.resetFields();
-      router.push("/login");
+      router.push("auth/login");
     } catch (error) {
       const { message: errorMessage, field } = authError(error);
       form.setFields([{ name: field, errors: [errorMessage] }]);
