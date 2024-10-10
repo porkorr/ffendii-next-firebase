@@ -1,16 +1,16 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
-import { collection, getDoc, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, getDoc, doc, setDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import Loading from "@/components/Loading";
 
 const FirestoreContext = createContext();
 
 const FirestoreProvider = ({ children }) => {
-  const [requests, setRequests] = useState([]);
-  const [settings, setSettings] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [requests, setRequests] = useState(null);
+  const [settings, setSettings] = useState(null);
+  const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // ดึงข้อมูล sender ทั้งหมดจาก reference
@@ -99,32 +99,40 @@ const FirestoreProvider = ({ children }) => {
 
   const fetchSettings = async () => {
     try {
-      const unsubscribe = onSnapshot(
-        query(collection(db, "settings")),
-        async (snapshot) => {
-          if (snapshot.empty) {
-            setSettings([]);
-          } else {
-            const settings = await Promise.all(
-              snapshot.docs.map((doc) => {
-                const data = doc.data();
+      const settingsDocRef = doc(db, "settings", "ZH98PetEAQWOpYzFsTJS");
 
-                return {
-                  ...data,
-                };
-              })
-            );
-            setSettings(settings[0]);
-          }
-        },
-        (error) => {
-          //
+      // ตรวจสอบว่าเอกสาร settings มีอยู่ใน Firestore หรือไม่
+      const settingsDoc = await getDoc(settingsDocRef);
+
+      if (!settingsDoc.exists()) {
+        // ถ้าเอกสารยังไม่มี ให้สร้างเอกสารใหม่ด้วย ID คงที่
+        const defaultSettings = {
+          live: true,
+          request: true,
+          requestCooldown: true,
+          requestCooldownSeconds: 180,
+          widget: true,
+        };
+
+        // ใช้ setDoc เพื่อสร้างเอกสารใหม่
+        await setDoc(settingsDocRef, defaultSettings);
+        setSettings(defaultSettings); // อัปเดต state ด้วย settings ใหม่
+      } else {
+        // ถ้ามีเอกสาร settings อยู่แล้ว ให้ใช้งานเอกสารนั้น
+        const data = settingsDoc.data();
+        setSettings(data); // ตั้งค่า settings จากเอกสารที่มีอยู่
+      }
+
+      // ตั้งค่าการติดตามการเปลี่ยนแปลงในเอกสาร settings
+      const unsubscribe = onSnapshot(settingsDocRef, (doc) => {
+        if (doc.exists()) {
+          setSettings(doc.data()); // อัปเดต state เมื่อมีการเปลี่ยนแปลง
         }
-      );
+      });
 
-      return () => unsubscribe();
+      return () => unsubscribe(); // คืนค่าฟังก์ชันสำหรับยกเลิกการติดตาม
     } catch (error) {
-      //
+      console.error("Error in fetchSettings: ", error);
     }
   };
 
@@ -172,11 +180,7 @@ const FirestoreProvider = ({ children }) => {
     return <Loading className="loading w-screen h-screen" />;
   }
 
-  return (
-    <FirestoreContext.Provider value={{ requests, setRequests, settings, setSettings, users, setUsers }}>
-      {children}
-    </FirestoreContext.Provider>
-  );
+  return <FirestoreContext.Provider value={{ requests, settings, users }}>{children}</FirestoreContext.Provider>;
 };
 
 export { FirestoreProvider, FirestoreContext };

@@ -31,7 +31,7 @@ const CookieConsent = () => {
   }
 
   return (
-    <div className="cookie-consent fade-in">
+    <div className="cookie-consent">
       {!minimized ? (
         <div className="cookie-popup">
           <p>We use cookies to enhance your experience. By continuing, you agree to our use of cookies.</p>

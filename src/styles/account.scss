@@ -103,7 +103,7 @@
         }
       }
       .verified {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         > div {
           &:nth-child(1) {
             display: flex;
@@ -129,7 +129,7 @@
         }
       }
       .not-verified {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         > div {
           &:nth-child(1) {
             display: flex;
@@ -153,12 +153,6 @@
             }
           }
         }
-      }
-    }
-    .loading {
-      margin-top: 20px;
-      @media (max-width: 768px) {
-        margin: 20px 0 10px 0;
       }
     }
   }

@@ -14,9 +14,11 @@ import "@/styles/request.css";
 
 const RequestPage = () => {
   const { user } = useAuth();
-  const { requests, setRequests, settings } = useFirestore();
+  const { requests, settings } = useFirestore();
   const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
+
+  // console.log(settings);
 
   const handleDeleteSelect = (request) => {
     setRequestToDelete(request);
@@ -33,23 +35,20 @@ const RequestPage = () => {
         const requestDocRef = doc(db, "requests", requestToDelete.id);
         await deleteDoc(requestDocRef)
           .then(() => {
-            setRequests((prevState) => {
-              const remainingRequests = prevState.filter((request) => request.id !== requestToDelete.id);
-              const reorderedRequests = remainingRequests.map((item, index) => ({
-                ...item,
-                order: index + 1,
-              }));
+            const remainingRequests = requests.filter((request) => request.id !== requestToDelete.id);
+            const reorderedRequests = remainingRequests.map((item, index) => ({
+              ...item,
+              order: index + 1,
+            }));
 
-              reorderedRequests.map(async (item, index) => {
-                try {
-                  await updateDoc(doc(db, "requests", item.id), { order: item.order });
-                } catch (error) {
-                  //
-                }
-              });
-
-              return reorderedRequests;
+            reorderedRequests.map(async (item) => {
+              try {
+                await updateDoc(doc(db, "requests", item.id), { order: item.order });
+              } catch (error) {
+                //
+              }
             });
+            //
             message.success("Deleted!");
             setModalDeleteOpen(false);
           })
@@ -63,8 +62,8 @@ const RequestPage = () => {
   };
 
   return (
-    <main className="fade-in">
-      {settings.live ? (
+    <main>
+      {settings !== null && settings?.live === true && (
         <div className="request">
           <div className="now-playing">
             {requests[0]?.url && getYouTubeVideoId(requests[0]?.url) && (
@@ -213,7 +212,8 @@ const RequestPage = () => {
             <p>{requestToDelete?.title}</p>
           </Modal>
         </div>
-      ) : (
+      )}
+      {settings !== null && settings?.live === false && (
         <div className="request-offline fade-in">
           <h2>ffendii is offline.</h2>
           <p>I'll be back online soon!</p>

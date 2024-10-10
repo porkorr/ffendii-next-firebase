@@ -1,25 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { auth } from "@/utils/firebase";
 import FormChangeEmail from "@/components/FormChangeEmail";
-import Loading from "@/components/Loading";
 
 const AccountChangeEmailPage = () => {
-  const [loading, setLoading] = useState(true);
   const [isVerified, setIsVerified] = useState(auth.currentUser?.emailVerified || false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loading className="loading w-full full" />;
-  }
 
   return (
     <div className="account-email fade-in">

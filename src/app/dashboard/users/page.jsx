@@ -4,7 +4,7 @@ import TableUsers from "@/components/TableUsers";
 
 const DashboardUsersPage = () => {
   return (
-    <div className="dashboard-users">
+    <div className="dashboard-users fade-in">
       <TableUsers />
     </div>
   );

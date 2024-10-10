@@ -1,26 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
-import Loading from "@/components/Loading";
 import Link from "next/link";
 import "@/styles/account.css";
 
 const AccountPage = ({ children }) => {
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!user) {
       router.push("/");
     }
-  }, [user, isLoading, pathname]);
-
-  if (isLoading) {
-    return <Loading className="loading w-screen h-screen" />;
-  }
+  }, [user, pathname]);
 
   return (
     <main className="fade-in">

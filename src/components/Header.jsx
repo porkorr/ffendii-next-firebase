@@ -43,7 +43,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`fade-in ${scrollY >= 50 ? "active" : ""}`.trim()}>
+    <header className={`${scrollY >= 50 ? "active" : ""}`.trim()}>
       <div className="header-container">
         <div>
           <Link href="/" className="logo">

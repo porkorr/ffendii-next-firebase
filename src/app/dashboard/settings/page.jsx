@@ -5,11 +5,9 @@ import { Button, Input, message, Switch, Form } from "antd";
 import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import useFirestore from "@/hooks/useFirestore";
-import Loading from "@/components/Loading";
 
 const DashboardSettingsPage = () => {
-  const { settings, setSettings } = useFirestore();
-  const [loading, setLoading] = useState(true);
+  const { settings } = useFirestore();
 
   const [formRequestCooldownSeconds] = Form.useForm();
   const [requestCooldownSeconds, setRequestCooldownSeconds] = useState(0);
@@ -18,19 +16,18 @@ const DashboardSettingsPage = () => {
   const [widgetLink, setWidgetLink] = useState();
 
   const handleSwitchChange = async (key, checked) => {
-    const updatedSettings = {
-      ...settings,
-      [key]: checked,
-    };
-
     const settingsCollectionRef = collection(db, "settings");
     const snapshot = await getDocs(settingsCollectionRef);
 
     if (!snapshot.empty) {
       const settingsDocRef = doc(db, "settings", "ZH98PetEAQWOpYzFsTJS");
       try {
+        const updatedSettings = {
+          ...settings,
+          [key]: checked,
+        };
+
         await updateDoc(settingsDocRef, updatedSettings);
-        setSettings(updatedSettings);
       } catch (error) {
         //
       }
@@ -44,13 +41,12 @@ const DashboardSettingsPage = () => {
 
     const settingsCollectionRef = collection(db, "settings");
     const snapshot = await getDocs(settingsCollectionRef);
-
+    setLoading(true);
     if (!snapshot.empty) {
       const settingsDocRef = doc(db, "settings", "ZH98PetEAQWOpYzFsTJS");
       try {
         const updatedSettings = { ...settings, requestCooldownSeconds };
         await updateDoc(settingsDocRef, updatedSettings);
-        setSettings(updatedSettings);
         message.success("Cooldown seconds updated successfully!");
       } catch (error) {
         //
@@ -59,6 +55,7 @@ const DashboardSettingsPage = () => {
     } else {
       //
     }
+    setLoading(false);
   };
 
   const handleFormFormWidgetLink = (values) => {
@@ -76,28 +73,20 @@ const DashboardSettingsPage = () => {
 
   useEffect(() => {
     const origin = window.location.origin;
-    setWidgetLink(`${origin}/widget/playing`);
+    // setWidgetLink(`${origin}/widget/playing`);
+    formWidgetLink.setFieldsValue({
+      widgetLink: `${origin}/widget/playing`,
+    });
   }, []);
 
   useEffect(() => {
-    if (settings.requestCooldownSeconds !== undefined) {
-      setRequestCooldownSeconds(settings.requestCooldownSeconds);
+    if (settings?.requestCooldownSeconds !== undefined) {
+      // setRequestCooldownSeconds(settings?.requestCooldownSeconds);
+      formRequestCooldownSeconds.setFieldsValue({
+        requestCooldownSeconds: settings?.requestCooldownSeconds,
+      });
     }
   }, [settings]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (settings) {
-        setLoading(false);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [settings]);
-
-  if (loading) {
-    return <Loading className="loading w-full full mt-[20px]" />;
-  }
 
   return (
     <div className="dashboard-settings fade-in">
@@ -160,7 +149,7 @@ const DashboardSettingsPage = () => {
             </Form.Item>
             <Form.Item>
               <Button htmlType="submit" size="large" className="!bg-neongold">
-                {!loading ? <>Update</> : null}
+                Update
               </Button>
             </Form.Item>
           </Form>

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, useEffect } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { Button, Table, Modal, Input, message } from "antd";
 import { CgMenuGridO } from "react-icons/cg";
 import { AiFillEdit } from "react-icons/ai";
@@ -12,17 +12,15 @@ import { SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import useFirestore from "@/hooks/useFirestore";
-import Loading from "@/components/Loading";
 
 const RowContext = createContext({});
 
 const TableRequestList = () => {
-  const { requests, setRequests } = useFirestore();
+  const { requests } = useFirestore();
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
   const [requestToEdit, setRequestToEdit] = useState(null);
   const [requestToDelete, setRequestToDelete] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   const columns = [
     {
@@ -132,35 +130,33 @@ const TableRequestList = () => {
 
   const onDragEnd = ({ active, over }) => {
     if (active.id !== over?.id) {
-      setRequests((prevState) => {
-        const activeItem = prevState.find((record) => record.id === active.id);
-        const overItem = prevState.find((record) => record.id === over.id);
+      const activeItem = requests.find((record) => record.id === active.id);
+      const overItem = requests.find((record) => record.id === over.id);
 
-        if (!activeItem || !overItem) {
-          return prevState;
+      if (!activeItem || !overItem) {
+        return prevState;
+      }
+
+      const activeIndex = requests.indexOf(activeItem);
+      const overIndex = requests.indexOf(overItem);
+
+      const newRequests = [...requests];
+      newRequests.splice(activeIndex, 1);
+      newRequests.splice(overIndex, 0, activeItem);
+
+      const updatedRequests = newRequests.map((item, index) => ({
+        ...item,
+        order: index + 1,
+      }));
+
+      console.log(updatedRequests);
+
+      updatedRequests.forEach(async (request) => {
+        try {
+          await updateDoc(doc(db, "requests", request.id), { order: request.order });
+        } catch (error) {
+          //
         }
-
-        const activeIndex = prevState.indexOf(activeItem);
-        const overIndex = prevState.indexOf(overItem);
-
-        const newRequests = [...prevState];
-        newRequests.splice(activeIndex, 1);
-        newRequests.splice(overIndex, 0, activeItem);
-
-        const updatedRequests = newRequests.map((item, index) => ({
-          ...item,
-          order: index + 1,
-        }));
-
-        updatedRequests.forEach(async (request) => {
-          try {
-            await updateDoc(doc(db, "requests", request.id), { order: request.order });
-          } catch (error) {
-            //
-          }
-        });
-
-        return updatedRequests;
       });
     }
   };
@@ -210,23 +206,20 @@ const TableRequestList = () => {
         const requestDocRef = doc(db, "requests", requestToDelete.id);
         await deleteDoc(requestDocRef)
           .then(() => {
-            setRequests((prevState) => {
-              const remainingRequests = prevState.filter((request) => request.id !== requestToDelete.id);
-              const reorderedRequests = remainingRequests.map((item, index) => ({
-                ...item,
-                order: index + 1,
-              }));
+            const remainingRequests = requests.filter((request) => request.id !== requestToDelete.id);
+            const reorderedRequests = remainingRequests.map((item, index) => ({
+              ...item,
+              order: index + 1,
+            }));
 
-              reorderedRequests.map(async (item, index) => {
-                try {
-                  await updateDoc(doc(db, "requests", item.id), { order: item.order });
-                } catch (error) {
-                  //
-                }
-              });
-
-              return reorderedRequests;
+            reorderedRequests.map(async (item, index) => {
+              try {
+                await updateDoc(doc(db, "requests", item.id), { order: item.order });
+              } catch (error) {
+                //
+              }
             });
+
             message.success("Deleted!");
             setModalDeleteOpen(false);
           })
@@ -239,22 +232,8 @@ const TableRequestList = () => {
     }
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (requests) {
-        setLoading(false);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [requests]);
-
-  if (loading) {
-    return <Loading className="loading w-full full mt-[20px]" />;
-  }
-
   return (
-    <div className="fade-in">
+    <>
       <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
         <SortableContext items={requests.map((item) => item.id)} strategy={verticalListSortingStrategy}>
           <Table
@@ -347,7 +326,7 @@ const TableRequestList = () => {
       >
         <p>{requestToDelete?.title}</p>
       </Modal>
-    </div>
+    </>
   );
 };
 

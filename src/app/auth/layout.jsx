@@ -27,7 +27,7 @@ const AuthPage = ({ children }) => {
       <div className="image">
         <Image src="/images/DSC07337.png" alt="Picture of the author" width={250} height={333} />
       </div>
-      <div className="modal fade-in">{children}</div>
+      <div className="modal">{children}</div>
     </div>
   );
 };

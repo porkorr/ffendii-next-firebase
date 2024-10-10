@@ -1,18 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Table, Button, message, Modal } from "antd";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import useFirestore from "@/hooks/useFirestore";
-import Loading from "@/components/Loading";
 
 const TableUsers = () => {
-  const { users, setUsers } = useFirestore();
+  const { users } = useFirestore();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isBanAction, setIsBanAction] = useState(true);
-  const [loading, setLoading] = useState(true);
 
   const openModal = (user, isBan) => {
     setSelectedUser(user);
@@ -83,22 +81,8 @@ const TableUsers = () => {
     },
   ];
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (users) {
-        setLoading(false);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [users]);
-
-  if (loading) {
-    return <Loading className="loading w-full full mt-[20px]" />;
-  }
-
   return (
-    <div className="fade-in">
+    <>
       <Table
         dataSource={users}
         columns={columns}
@@ -143,7 +127,7 @@ const TableUsers = () => {
           <strong>{selectedUser?.displayName}</strong>
         </p>
       </Modal>
-    </div>
+    </>
   );
 };
 

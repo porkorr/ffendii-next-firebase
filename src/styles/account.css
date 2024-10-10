@@ -211,7 +211,7 @@
 .account .account-content .account-profile .verified,
 .account .account-content .account-email .verified,
 .account .account-content .account-password .verified {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .account .account-content .account-profile .verified > div:nth-child(1),
 .account .account-content .account-email .verified > div:nth-child(1),
@@ -244,7 +244,7 @@
 .account .account-content .account-profile .not-verified,
 .account .account-content .account-email .not-verified,
 .account .account-content .account-password .not-verified {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .account .account-content .account-profile .not-verified > div:nth-child(1),
 .account .account-content .account-email .not-verified > div:nth-child(1),
@@ -273,12 +273,4 @@
 .account .account-content .account-password .not-verified > div:nth-child(2) p {
   font-size: 12px;
   color: #ff205f;
-}
-.account .account-content .loading {
-  margin-top: 20px;
-}
-@media (max-width: 768px) {
-  .account .account-content .loading {
-    margin: 20px 0 10px 0;
-  }
 }
