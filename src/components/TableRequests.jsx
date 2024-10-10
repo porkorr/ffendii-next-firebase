@@ -149,8 +149,6 @@ const TableRequestList = () => {
         order: index + 1,
       }));
 
-      console.log(updatedRequests);
-
       updatedRequests.forEach(async (request) => {
         try {
           await updateDoc(doc(db, "requests", request.id), { order: request.order });

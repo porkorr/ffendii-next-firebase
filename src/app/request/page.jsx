@@ -18,8 +18,6 @@ const RequestPage = () => {
   const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
 
-  // console.log(settings);
-
   const handleDeleteSelect = (request) => {
     setRequestToDelete(request);
     setModalDeleteOpen(true);

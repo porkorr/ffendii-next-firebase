@@ -132,7 +132,7 @@ const FirestoreProvider = ({ children }) => {
 
       return () => unsubscribe(); // คืนค่าฟังก์ชันสำหรับยกเลิกการติดตาม
     } catch (error) {
-      console.error("Error in fetchSettings: ", error);
+      //
     }
   };
 
