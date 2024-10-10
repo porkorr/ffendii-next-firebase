@@ -8,9 +8,9 @@ import Loading from "@/components/Loading";
 const FirestoreContext = createContext();
 
 const FirestoreProvider = ({ children }) => {
-  const [requests, setRequests] = useState(null);
+  const [requests, setRequests] = useState([]);
   const [settings, setSettings] = useState(null);
-  const [users, setUsers] = useState(null);
+  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // ดึงข้อมูล sender ทั้งหมดจาก reference
