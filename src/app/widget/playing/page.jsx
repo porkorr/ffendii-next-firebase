@@ -1,31 +1,48 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { getYouTubeVideoId } from "@/utils/utils";
 import useFirestore from "@/hooks/useFirestore";
 import "@/styles/widget.css";
 
 const WidgetPlayingPage = () => {
   const { requests, settings } = useFirestore();
-  function getYouTubeVideoId(url) {
-    const regex = /[?&]v=([^&#]*)/;
-    const match = url?.match(regex);
-    return match ? match[1] : null;
-  }
+
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [isEffectActive, setIsEffectActive] = useState(false);
+
+  useEffect(() => {
+    const videoId = getYouTubeVideoId(requests[0]?.url);
+    setIsEffectActive(true);
+    if (videoId) {
+      const newThumbnailUrl = `http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      setThumbnailUrl(newThumbnailUrl);
+      const timeout = setTimeout(() => {
+        setIsEffectActive(false);
+      }, 300);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setThumbnailUrl("");
+      const timeout = setTimeout(() => {
+        setIsEffectActive(false);
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [requests[0]?.url]);
 
   return (
     <div>
       {settings.widget && (
         <div className="widget-card">
-          {requests[0]?.url && getYouTubeVideoId(requests[0]?.url) && (
-            <div className="widget-background">
-              <img
-                src={`http://img.youtube.com/vi/${getYouTubeVideoId(requests[0]?.url)}/maxresdefault.jpg`}
-                alt="Thumbnail"
-              />
+          {thumbnailUrl && (
+            <div className={`widget-background`}>
+              <img src={thumbnailUrl} alt="Thumbnail" className={`now-playing ${isEffectActive ? "fade-in" : ""}`} />
             </div>
           )}
           <div className="widget-content">
             {requests.length !== 0 ? (
-              <>
+              <div className={`${isEffectActive ? "opacity-0" : "slide-in"}`}>
                 <div className="widget-title">
                   <p>Now playing</p>
                   <div className="dots-wave">
@@ -37,7 +54,7 @@ const WidgetPlayingPage = () => {
                 <div className="widget-song-name">
                   <p>{requests[0]?.title}</p>
                 </div>
-              </>
+              </div>
             ) : (
               <>
                 <div className="widget-song-name">

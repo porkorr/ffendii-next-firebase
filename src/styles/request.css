@@ -88,6 +88,16 @@
     transform: scale(1);
   }
 }
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
 .request {
   width: 1080px;
   margin: 0 auto;
@@ -176,6 +186,7 @@
 .request .now-playing .now-content .now-title {
   position: relative;
   display: flex;
+  justify-content: center;
   font-size: 40px;
   color: #d1ff00;
 }

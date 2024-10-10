@@ -347,6 +347,10 @@ footer {
   animation-fill-mode: forwards;
 }
 
+.slide-in {
+  animation: slide-in 0.3s forwards;
+}
+
 /// ant design form ///
 .ant-form {
   .ant-form-item {

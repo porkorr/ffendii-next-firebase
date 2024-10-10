@@ -74,6 +74,7 @@
       .now-title {
         position: relative;
         display: flex;
+        justify-content: center;
         font-size: 40px;
         color: $color-neonyellow;
         @media (max-width: 580px) {

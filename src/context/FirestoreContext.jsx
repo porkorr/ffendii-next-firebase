@@ -180,7 +180,9 @@ const FirestoreProvider = ({ children }) => {
     return <Loading className="loading w-screen h-screen" />;
   }
 
-  return <FirestoreContext.Provider value={{ requests, settings, users }}>{children}</FirestoreContext.Provider>;
+  return (
+    <FirestoreContext.Provider value={{ requests, setRequests, settings, users }}>{children}</FirestoreContext.Provider>
+  );
 };
 
 export { FirestoreProvider, FirestoreContext };

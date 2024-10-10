@@ -14,9 +14,12 @@ import "@/styles/request.css";
 
 const RequestPage = () => {
   const { user } = useAuth();
-  const { requests, settings } = useFirestore();
+  const { requests, setRequests, settings } = useFirestore();
   const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
+
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [isEffectActive, setIsEffectActive] = useState(false);
 
   const handleDeleteSelect = (request) => {
     setRequestToDelete(request);
@@ -33,20 +36,23 @@ const RequestPage = () => {
         const requestDocRef = doc(db, "requests", requestToDelete.id);
         await deleteDoc(requestDocRef)
           .then(() => {
-            const remainingRequests = requests.filter((request) => request.id !== requestToDelete.id);
-            const reorderedRequests = remainingRequests.map((item, index) => ({
-              ...item,
-              order: index + 1,
-            }));
+            setRequests((prevState) => {
+              const remainingRequests = prevState.filter((request) => request.id !== requestToDelete.id);
+              const reorderedRequests = remainingRequests.map((item, index) => ({
+                ...item,
+                order: index + 1,
+              }));
 
-            reorderedRequests.map(async (item) => {
-              try {
-                await updateDoc(doc(db, "requests", item.id), { order: item.order });
-              } catch (error) {
-                //
-              }
+              reorderedRequests.map(async (item, index) => {
+                try {
+                  await updateDoc(doc(db, "requests", item.id), { order: item.order });
+                } catch (error) {
+                  //
+                }
+              });
+
+              return reorderedRequests;
             });
-            //
             message.success("Deleted!");
             setModalDeleteOpen(false);
           })
@@ -59,26 +65,43 @@ const RequestPage = () => {
     }
   };
 
+  useEffect(() => {
+    const videoId = getYouTubeVideoId(requests[0]?.url);
+    setIsEffectActive(true);
+    if (videoId) {
+      const newThumbnailUrl = `http://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      setThumbnailUrl(newThumbnailUrl);
+      const timeout = setTimeout(() => {
+        setIsEffectActive(false);
+      }, 300);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setThumbnailUrl("");
+      const timeout = setTimeout(() => {
+        setIsEffectActive(false);
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [requests[0]?.url]);
+
   return (
     <main>
       {settings !== null && settings?.live === true && (
         <div className="request">
-          <div className="now-playing">
-            {requests[0]?.url && getYouTubeVideoId(requests[0]?.url) && (
-              <div className="now-cover">
-                <img
-                  src={`http://img.youtube.com/vi/${getYouTubeVideoId(requests[0]?.url)}/maxresdefault.jpg`}
-                  alt="Thumbnail"
-                />
+          <div className={`now-playing`}>
+            {thumbnailUrl && (
+              <div className={`now-cover`}>
+                <img src={thumbnailUrl} alt="Thumbnail" className={`now-playing ${isEffectActive ? "fade-in" : ""}`} />
               </div>
             )}
-            <div className="now-content">
+            <div className={`now-content`}>
               <div className="now-badge-live">
                 <HiStatusOnline size={20} />
                 Live
               </div>
               {requests.length > 0 ? (
-                <>
+                <div className={`${isEffectActive ? "opacity-0" : "slide-in"}`}>
                   <div className="now-title">
                     <p>Now playing</p>
                     <div className="dots-wave">
@@ -90,7 +113,7 @@ const RequestPage = () => {
                   <div className="now-song-name">
                     <p>{requests[0]?.title}</p>
                   </div>
-                </>
+                </div>
               ) : (
                 <>
                   <div className="now-song-name fade-in">
@@ -100,7 +123,7 @@ const RequestPage = () => {
               )}
             </div>
           </div>
-          <div className="up-next">
+          <div className="up-next slide-in">
             {requests.length > 1 ? (
               <div className="next-title">
                 <h4>Up Next</h4>
@@ -114,7 +137,7 @@ const RequestPage = () => {
             <div className="next-requests">
               <div className="list">
                 {requests.slice(1).map((request, index) => (
-                  <div className={`item`} key={request.id}>
+                  <div className={`item fade-in`} key={request.id}>
                     <div className="item-order">{index + 1}</div>
                     <div className="item-detail">
                       <div className="title">{request.title}</div>
